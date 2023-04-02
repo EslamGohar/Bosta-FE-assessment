@@ -48,8 +48,8 @@ const Navbar = () => {
       {windowWidth < mobileWidth ? closeIcon : ""}
       <div>
         <NavItem linkName="Home" linkURL="/home" />
-        <NavItem linkName="Pricing" linkURL="/pricing" />
         <NavItem linkName="Contact Sales" linkURL="/contact-sales" />
+        <NavItem linkName="Pricing" linkURL="/pricing" />
       </div>
       <div>
         <div className="trackShipment">
