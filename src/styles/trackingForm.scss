@@ -1,0 +1,111 @@
+@import "./base";
+
+// .trackingContainer {
+//   //   border: 1px solid #dadada;
+//   //   border-radius: 5px;
+//   margin: 8rem 0;
+//   padding: 1rem 0 3rem 0px;
+
+//   display: table;
+//   width: 100%;
+//   border-collapse: collapse;
+
+//   .trackingDetails {
+//     display: table-row;
+
+//     &_shipment {
+//       // border-bottom: 1px solid #dadada;
+//       // display: flex;
+//       // justify-content: center;
+//       // align-items: center;
+//       // align-content: center;
+
+//       display: table-cell;
+//       vertical-align: top;
+//       padding: 20px;
+//       border: 1px solid #ccc;
+
+//       &__data {
+//         //   display: flex;
+//         //   text-align: center;
+//         //   align-content: flex-start;
+//         //   align-items: center;
+//         //   justify-content: center;
+//         //   padding: 0px 50px;
+
+//         list-style: none;
+//         margin: 0;
+//         padding: 0;
+
+//         li {
+//           //  display: inline-grid;
+//           //  text-align: left;
+//           //  margin: 0px 11rem 0 0;
+
+//           margin: 10px 0;
+
+//           &:last-child {
+//             margin: 0;
+//           }
+
+//           label {
+//             color: #4e4f51ba;
+//             // font-weight: 500;
+//             // font-family: "Cairo-SemiBold";
+//             font-size: 1.2rem;
+
+//             font-weight: bold;
+//             text-transform: capitalize;
+//             display: inline-block;
+//             width: 150px;
+//           }
+
+//           span {
+//             // font-size: 1rem;
+//             // color: black;
+//             // font-family: "Cairo-Bold";
+
+//             display: inline-block;
+//             margin-left: 10px;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 5rem;
+
+  table {
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    font-family: $ff-primary;
+
+    th,
+    td {
+      padding: 10px 0;
+      text-transform: capitalize;
+    }
+
+    th {
+      font-weight: 400;
+    }
+
+    tr {
+      font-weight: 800;
+    }
+
+    tbody td {
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+}
