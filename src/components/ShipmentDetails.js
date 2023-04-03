@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchShipment } from "../redux/slices/shipment";
 import support from "../assets/support.svg";
@@ -7,12 +7,11 @@ import "../styles/shipmentDetails.scss";
 const ShipmentDetails = () => {
   const dispatch = useDispatch();
   const { loading, data, error } = useSelector((state) => state.shipment);
+  const { TransitEvents } = data;
 
   useEffect(() => {
-    if (loading) {
-      dispatch(fetchShipment());
-    }
-  }, [loading]);
+    dispatch(fetchShipment());
+  }, [dispatch]);
 
   if (loading) {
     return (
@@ -35,44 +34,41 @@ const ShipmentDetails = () => {
     return <p>Error: {error}</p>;
   }
 
-  const TransitEvents = data?.TransitEvents;
-
   return (
     <div className="shipmentDetails">
       <h2 className="table-title">Shipment Details</h2>
-      {data && (
-        <table>
-          <thead>
-            <tr>
-              <th>Hub</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{TransitEvents?.hub}</td>
-              <td>
-                {new Date(TransitEvents?.timestamp).toLocaleString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })}
-              </td>
-              <td>
-                {new Date(TransitEvents?.timestamp).toLocaleString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })}
-              </td>
-              <td>{TransitEvents?.state}</td>
-            </tr>
-          </tbody>
-        </table>
-      )}
-
+      <table>
+        <thead>
+          <tr>
+            <th>Hub</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          {!loading &&
+            TransitEvents?.map((event) => (
+              <tr key={Math.random()}>
+                <td>{event?.hub || "-"}</td>
+                <td>
+                  {new Date(event?.timestamp).toLocaleString("en-US", {
+                    day: "numeric",
+                    month: "numeric",
+                    year: "numeric",
+                  }) || "-"}
+                </td>
+                <td>
+                  {new Date(event?.timestamp).toLocaleTimeString("en-US", {
+                    hour: "numeric",
+                    minute: "numeric",
+                  }) || "-"}
+                </td>
+                <td>{event?.state || "-"}</td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
       <div className="shipmentDetails__address">
         <h2>Delivery Address</h2>
         <div className="shipmentDetails__address_container">
