@@ -5,6 +5,10 @@ export const fetchShipment = createAsyncThunk(
   "shipment/fetchShipment",
   async (trackingNumber, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
+
+    if (!trackingNumber) {
+      throw new Error("Tracking number is required");
+    }
     try {
       const res = await axios.get(
         `https://tracking.bosta.co/shipments/track/${trackingNumber}`

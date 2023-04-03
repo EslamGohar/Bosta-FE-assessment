@@ -1,8 +1,14 @@
 import React from "react";
-import ShipmentTable from "../components/TrackingForm";
+import TrackingForm from "../components/TrackingForm";
+import ShipmentDetails from "../components/ShipmentDetails";
 
 const OrderDetails = () => {
-  return <ShipmentTable trackingNumber="" />;
+  return (
+    <>
+      <TrackingForm />
+      <ShipmentDetails />
+    </>
+  );
 };
 
 export default OrderDetails;

@@ -1,21 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
+import { BsSearch } from "react-icons/bs";
+import { fetchShipment } from "../redux/slices/shipment";
 import { NavItem } from "./NavItem";
 import useWindowWidth from "../hooks/useWindowWidth";
 
-import logo from "../assets/ar-logo.svg";
+import logo from "../assets/en-logo.svg";
 import iconMenu from "../assets/icon-hamburger.svg";
 import iconClose from "../assets/icon-close.svg";
-import { IoIosArrowBack } from "react-icons/io";
-import { BsSearch } from "react-icons/bs";
-
 import "../styles/navbar.scss";
 
 const Navbar = () => {
-  const [showMenu, setShowMenu] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [trackingNumber, setTrackingNumber] = useState("");
+  const dispatch = useDispatch();
+  const dropdownRef = useRef(null);
+
+  const [showMenu, setShowMenu] = useState(false);
   const windowWidth = useWindowWidth();
   const mobileWidth = 480;
+
+  const getTrackingNumber = (e) => {
+    e.preventDefault();
+    dispatch(fetchShipment(trackingNumber));
+  };
 
   function toggleMenu() {
     setShowMenu(!showMenu);
@@ -24,6 +34,17 @@ const Navbar = () => {
   function handleTrackShipmentClick() {
     setDropdownVisible(!dropdownVisible);
   }
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownVisible(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, [dropdownRef]);
 
   const menuIcon = (
     <img
@@ -62,16 +83,25 @@ const Navbar = () => {
             onClick={handleTrackShipmentClick}
           />
         </div>
+
         {dropdownVisible && (
-          <div className="dropdown">
+          <form
+            onSubmit={getTrackingNumber}
+            ref={dropdownRef}
+            className="dropdown"
+          >
             <p>Track your shipment</p>
             <div className="input-container">
-              <input type="text" placeholder="Tracking No." />
-              <button>
+              <input
+                type="text"
+                placeholder="Tracking No."
+                onChange={(e) => setTrackingNumber(e.target.value)}
+              />
+              <button type="submit">
                 <BsSearch />
               </button>
             </div>
-          </div>
+          </form>
         )}
         <NavItem linkName="Login" linkURL="/login" />
       </div>

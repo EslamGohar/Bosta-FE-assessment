@@ -1,0 +1,99 @@
+@import "./base";
+
+.shipmentDetails {
+  padding: 1.5rem 12rem;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 1.2rem;
+
+  .table-title {
+    display: flex;
+    justify-content: center;
+    font-family: $ff-primary;
+    font-size: 17px;
+    margin: -55px;
+    position: absolute;
+    right: 15.7rem;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-radius: 6px;
+    width: 100%;
+    text-align: center;
+    font-family: $ff-primary;
+
+    th {
+      background-color: #f5f5f5;
+    }
+
+    th,
+    td {
+      border: 1px solid #e5e5e5;
+      padding: 10px;
+    }
+  }
+
+  .shipmentDetails__address {
+    max-width: 75%;
+    margin-top: -3.1rem;
+
+    &_container {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #f8f8f882;
+      font-family: $ff-primary;
+      font-size: 15px;
+      width: 21rem;
+      padding: 0.8rem 1.2rem;
+      text-align: right;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 17px;
+      font-family: $ff-primary;
+      margin-bottom: 20px;
+    }
+
+    &_report {
+      border: 1px solid #ccc5c587;
+      border-radius: 5px;
+      padding: 23px;
+      display: flex;
+      width: 21rem;
+
+      .help {
+        &_title {
+          color: #000;
+          font-family: $ff-primary;
+          font-size: 15px;
+          font-weight: 800;
+          width: 16rem;
+        }
+
+        &_btn {
+          font-size: 14px;
+          border: none;
+          background-color: $bg-btn;
+          border-radius: 11px;
+          padding: 5px 8px;
+          margin-top: 12px;
+          color: $bg-color;
+          font-family: $ff-primary;
+          cursor: pointer;
+        }
+
+        &_img {
+          display: flex;
+          align-items: center;
+          flex: 1 1;
+          width: 95px;
+          position: relative;
+          right: 45px;
+          top: 17px;
+        }
+      }
+    }
+  }
+}

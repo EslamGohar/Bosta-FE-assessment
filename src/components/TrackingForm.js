@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchShipment } from "../redux/slices/shipment";
+import ProgressBar from "./ShipmentProgressBar";
 import "../styles/trackingForm.scss";
 
 const TrackingForm = () => {
@@ -8,18 +9,37 @@ const TrackingForm = () => {
   const { loading, data, error } = useSelector((state) => state.shipment);
 
   useEffect(() => {
-    dispatch(fetchShipment(7234258));
+    dispatch(fetchShipment());
   }, [dispatch]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <p
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "12% 0",
+          fontFamily: "'Cairo', sans-serif",
+          fontWeight: "800",
+        }}
+      >
+        Please, Insert Tracking Number into the track shipment menu above.
+      </p>
+    );
   }
 
   if (error) {
     return <p>Error: {error}</p>;
   }
 
-  const { TrackingNumber, provider, PromisedDate, CurrentStatus } = data;
+  const {
+    TrackingNumber,
+    provider,
+    PromisedDate,
+    CurrentStatus,
+    TransitEvents,
+  } = data;
 
   return (
     <div className="table-container">
@@ -54,37 +74,18 @@ const TrackingForm = () => {
                 })}
               </td>
             </tr>
+            <tr>
+              <td className="trackingProgress">
+                <ProgressBar
+                  currentStatus={CurrentStatus?.state}
+                  trackingDataTransit={TransitEvents?.state}
+                />
+              </td>
+            </tr>
           </tbody>
         </table>
       )}
     </div>
-
-    /* <div className="trackingDetails">
-        <div className="trackingDetails_shipment">
-          <ul className="trackingDetails_shipment__data">
-            <li>
-              <label className="label">ship Number {TrackingNumber}</label>
-              <span className="status">{CurrentStatus?.state}</span>
-            </li>
-            <li>
-              <label className="label">last update</label>
-              <span className="status">
-                {new Date(CurrentStatus?.timestamp).toLocaleString()}
-              </span>
-            </li>
-            <li>
-              <label className="label">seller name</label>
-              <span className="status">{provider}</span>
-            </li>
-            <li>
-              <label className="label">delivered date</label>
-              <span className="status">
-                {new Date(PromisedDate).toLocaleString()}
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div> */
   );
 };
 
