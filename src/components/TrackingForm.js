@@ -21,7 +21,7 @@ const TrackingForm = () => {
           alignItems: "center",
           padding: "12% 0",
           fontFamily: "'Cairo', sans-serif",
-          fontWeight: "800",
+          fontWeight: "400",
         }}
       >
         Please, Insert Tracking Number into the track shipment menu above.

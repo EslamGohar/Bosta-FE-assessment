@@ -1,45 +1,53 @@
 @import "./base";
 
 .shipmentDetails {
-  padding: 1.5rem 6rem;
+  padding: 0 5rem;
   display: flex;
   flex-direction: row-reverse;
   gap: 1.2rem;
 
-  .table-title {
-    display: flex;
-    justify-content: center;
-    font-family: $ff-primary;
-    font-size: 17px;
-    margin: -55px;
-    position: absolute;
-    right: 9.5rem;
-  }
+  .table-details {
+    flex: 1;
 
-  table {
-    border-collapse: collapse;
-    border-radius: 6px;
-    text-align: center;
-    font-family: $ff-primary;
-    width: 100%;
-
-    th {
-      background-color: #f5f5f5;
+    .table-title {
+      font-family: $ff-primary;
+      font-size: 17px;
+      text-align: right;
+      margin-bottom: 20px;
     }
 
-    th,
-    td {
-      border: 1px solid #e5e5e5;
-      padding: 10px;
+    table {
+      font-family: $ff-primary;
+      text-align: center;
+      width: 100%;
+      margin-top: -4px;
+      margin-bottom: 30px;
+
+      border: 1px solid #e8e8e8;
+      border-radius: 7px;
+      border-collapse: separate;
+      border-spacing: 0;
+
+      th {
+        background-color: #f5f5f5f6;
+        border-top: none;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+        border-left: 0;
+        border-top: 0;
+      }
     }
   }
 
   .shipmentDetails__address {
     max-width: 75%;
-    margin-top: -3.1rem;
 
     &_container {
-      border: 1px solid #ccc;
+      border: 1px solid #e8e8e8;
       border-radius: 6px;
       background-color: #f8f8f882;
       font-family: $ff-primary;
@@ -53,11 +61,11 @@
     h2 {
       font-size: 17px;
       font-family: $ff-primary;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     &_report {
-      border: 1px solid #ccc5c587;
+      border: 1px solid #e8e8e8;
       border-radius: 5px;
       padding: 23px;
       display: flex;

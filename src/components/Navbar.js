@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 import { BsSearch } from "react-icons/bs";
 import { fetchShipment } from "../redux/slices/shipment";
 import { NavItem } from "./NavItem";
@@ -27,6 +27,7 @@ const Navbar = () => {
     dispatch(fetchShipment(trackingNumber));
   };
 
+  // responsive navbar menu
   function toggleMenu() {
     setShowMenu(!showMenu);
   }
@@ -73,17 +74,12 @@ const Navbar = () => {
         <NavItem linkName="Pricing" linkURL="/pricing" />
       </div>
       <div>
-        <div className="trackShipment">
+        <div className="trackShipment" onClick={handleTrackShipmentClick}>
+          <NavItem linkName="Track Shipment" linkURL="/" />
           <span>
-            <IoIosArrowBack />
+            <IoIosArrowDown />
           </span>
-          <NavItem
-            linkName="Track Shipment"
-            linkURL="/"
-            onClick={handleTrackShipmentClick}
-          />
         </div>
-
         {dropdownVisible && (
           <form
             onSubmit={getTrackingNumber}

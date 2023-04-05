@@ -20,12 +20,12 @@ const ShipmentDetails = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          padding: "12% 0",
+          padding: "5% 0",
           fontFamily: "'Cairo', sans-serif",
-          fontWeight: "800",
+          fontWeight: "500",
         }}
       >
-        Loading...
+        Here the details will appear..
       </div>
     );
   }
@@ -36,39 +36,41 @@ const ShipmentDetails = () => {
 
   return (
     <div className="shipmentDetails">
-      <h2 className="table-title">Shipment Details</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Hub</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          {!loading &&
-            TransitEvents?.map((event) => (
-              <tr key={Math.random()}>
-                <td>{event?.hub || "-"}</td>
-                <td>
-                  {new Date(event?.timestamp).toLocaleString("en-US", {
-                    day: "numeric",
-                    month: "numeric",
-                    year: "numeric",
-                  }) || "-"}
-                </td>
-                <td>
-                  {new Date(event?.timestamp).toLocaleTimeString("en-US", {
-                    hour: "numeric",
-                    minute: "numeric",
-                  }) || "-"}
-                </td>
-                <td>{event?.state || "-"}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      <div className="table-details">
+        <h2 className="table-title">Shipment Details</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Hub</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            {!loading &&
+              TransitEvents?.map((event) => (
+                <tr key={Math.random()}>
+                  <td>{event?.hub || "-"}</td>
+                  <td>
+                    {new Date(event?.timestamp).toLocaleString("en-US", {
+                      day: "numeric",
+                      month: "numeric",
+                      year: "numeric",
+                    }) || "-"}
+                  </td>
+                  <td>
+                    {new Date(event?.timestamp).toLocaleTimeString("en-US", {
+                      hour: "numeric",
+                      minute: "numeric",
+                    }) || "-"}
+                  </td>
+                  <td>{event?.state || "-"}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
       <div className="shipmentDetails__address">
         <h2>Delivery Address</h2>
         <div className="shipmentDetails__address_container">

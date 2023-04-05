@@ -32,7 +32,6 @@ nav {
     }
 
     @include mobile {
-      animation: cover 0.2s forwards;
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
@@ -57,8 +56,8 @@ nav {
       font-size: 1rem;
       font-weight: 600;
       color: $text-color;
-      margin-left: 4rem;
       text-decoration: none;
+      margin-left: 4rem;
 
       @include mobile {
         padding: 0.6rem 1.7rem;
@@ -70,30 +69,47 @@ nav {
 
       &:hover {
         color: $bg-btn;
-        text-decoration: underline;
       }
     }
 
+    & > div:nth-child(1) {
+      width: 50%;
+    }
+
     & > div:nth-child(2) {
-      width: 45%;
+      width: 50%;
       display: flex;
+      justify-content: center;
       align-items: center;
 
       .trackShipment {
         display: flex;
+        justify-content: center;
         align-items: center;
         cursor: pointer;
 
+        a {
+          margin: 0 auto;
+          padding-left: 1.7rem;
+          padding-right: 0.6rem;
+        }
+
         span {
-          position: relative;
-          left: 3.6rem;
+          padding-top: 5px;
+          margin-right: 20px;
         }
 
         &:hover {
+          border: 1px solid #ecebeb;
+          border-bottom: 0;
+          border-radius: 8px;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+          box-shadow: 0 -10px 13px 5px #f0eeee;
+          padding: 21px 0;
+
           span {
-            transform: translateX(-5px);
             color: $bg-btn;
-            transition: color 0.1s ease-in-out;
           }
 
           a {
@@ -116,7 +132,8 @@ nav {
         height: 10rem;
         background-color: $bg-color;
         border: 1px solid #e4e4e4;
-        border-radius: 8px;
+        border-radius: 9px;
+        border-top-right-radius: 0;
 
         p {
           width: 100%;
@@ -131,33 +148,38 @@ nav {
           margin-bottom: 25px;
 
           input[type="text"] {
-            flex: 1;
             position: relative;
             width: 15rem;
             padding: 0.6rem;
             margin-right: 5px;
             border: 1px solid #e4e4e4;
             border-radius: 4px;
+          }
 
-            ::placeholder {
-              color: #e8e8e8;
-            }
+          ::placeholder {
+            color: #b1b2b4;
+            font-size: 15px;
+            font-family: $ff-primary;
           }
 
           button {
             background-color: $bg-btn;
-            padding: 0.68rem 0.9rem;
+            padding: 0.55rem 0.8rem;
             border: none;
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
             position: absolute;
-            right: 43px;
+            right: 2.6rem;
             cursor: pointer;
 
             & > * {
-              font-size: 1.4rem;
+              font-size: 1.7rem;
               color: $bg-color;
             }
+          }
+          :focus {
+            outline: none;
+            box-shadow: none;
           }
         }
       }
