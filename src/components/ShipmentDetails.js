@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { fetchShipment } from "../redux/slices/shipment";
-import support from "../assets/support.svg";
+import support from "../assets/support.png";
 import "../styles/shipmentDetails.scss";
 
 const ShipmentDetails = () => {
   const dispatch = useDispatch();
   const { loading, data, error } = useSelector((state) => state.shipment);
   const { TransitEvents } = data;
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(fetchShipment());
@@ -37,53 +40,58 @@ const ShipmentDetails = () => {
   return (
     <div className="shipmentDetails">
       <div className="table-details">
-        <h2 className="table-title">Shipment Details</h2>
+        <h2 className="table-title">{t("tracking_table.header")}</h2>
         <table>
           <thead>
             <tr>
-              <th>Hub</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Details</th>
+              <th>{t("tracking_table.hub")}</th>
+              <th>{t("tracking_table.date")}</th>
+              <th>{t("tracking_table.time")}</th>
+              <th>{t("tracking_table.details")}</th>
             </tr>
           </thead>
           <tbody>
             {!loading &&
               TransitEvents?.map((event) => (
                 <tr key={Math.random()}>
-                  <td>{event?.hub || "-"}</td>
+                  <td>{t("dummyLocationShort")}</td>
                   <td>
-                    {new Date(event?.timestamp).toLocaleString("en-US", {
+                    {t("dateShort", {
+                      val: event?.timestamp ? new Date(event?.timestamp) : null,
+                    })}
+                    {/* {new Date(event?.timestamp).toLocaleString("ar-EG", {
                       day: "numeric",
                       month: "numeric",
                       year: "numeric",
-                    }) || "-"}
+                    }) || "-"} */}
                   </td>
                   <td>
-                    {new Date(event?.timestamp).toLocaleTimeString("en-US", {
+                    {t("dateTime", {
+                      val: event?.timestamp ? new Date(event?.timestamp) : null,
+                    })}
+                    {/* {new Date(event?.timestamp).toLocaleTimeString("ar-EG", {
                       hour: "numeric",
                       minute: "numeric",
-                    }) || "-"}
+                    }) || "-"} */}
                   </td>
-                  <td>{event?.state || "-"}</td>
+                  <td>{t(`tracking.${event?.state}`, "-")}</td>
                 </tr>
               ))}
           </tbody>
         </table>
       </div>
+
       <div className="shipmentDetails__address">
-        <h2>Delivery Address</h2>
+        <h2>{t("reportProblem.header")}</h2>
         <div className="shipmentDetails__address_container">
-          امبابة شارع طلعت حرب مدينة العمال بجوار البرنس منزل 17 بلوك 22 ,,
-          Cairo
+          {t("dummyLocationLong")}
         </div>
+
         <div className="shipmentDetails__address_report">
           <div className="help_center">
-            <p className="help_title">
-              Is there a problem with your shipment ?!
-            </p>
+            <p className="help_title">{t("reportProblem.question")}</p>
             <button type="submit" className="help_btn">
-              Report your problem
+              {t("reportProblem.button")}
             </button>
           </div>
           <img className="help_img" alt="logo" src={support} />

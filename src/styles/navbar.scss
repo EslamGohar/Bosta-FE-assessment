@@ -82,6 +82,34 @@ nav {
       justify-content: center;
       align-items: center;
 
+      .langDropdown {
+        margin-left: 4rem;
+
+        :hover {
+          background-color: #f8f6f6;
+        }
+
+        select {
+          outline: none;
+          border: 1px solid transparent;
+          border-radius: 10px;
+          font-family: $ff-primary;
+          font-weight: 500;
+
+          :hover {
+            border-radius: 15px;
+          }
+
+          option[value] {
+            font-weight: bold;
+
+            :hover {
+              background-color: #e7e7e7;
+              border-radius: 10px;
+            }
+          }
+        }
+      }
       .trackShipment {
         display: flex;
         justify-content: center;
@@ -183,6 +211,9 @@ nav {
           }
         }
       }
+    }
+    .active {
+      color: $bg-btn;
     }
   }
 }

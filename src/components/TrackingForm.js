@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { fetchShipment } from "../redux/slices/shipment";
 import ProgressBar from "./ShipmentProgressBar";
 import "../styles/trackingForm.scss";
 
 const TrackingForm = () => {
-  const dispatch = useDispatch();
   const { loading, data, error } = useSelector((state) => state.shipment);
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(fetchShipment());
@@ -21,10 +23,10 @@ const TrackingForm = () => {
           alignItems: "center",
           padding: "12% 0",
           fontFamily: "'Cairo', sans-serif",
-          fontWeight: "400",
+          fontWeight: "800",
         }}
       >
-        Please, Insert Tracking Number into the track shipment menu above.
+        {t("insert_trackingNumber")}
       </p>
     );
   }
@@ -47,37 +49,35 @@ const TrackingForm = () => {
         <table>
           <thead>
             <tr>
-              <th>shipment number {TrackingNumber}</th>
-              <th>last update</th>
-              <th>provider</th>
-              <th>Promised date</th>
+              <th>
+                {t("tracking_status.trackingNumber")} {TrackingNumber}
+              </th>
+              <th>{t("tracking_status.lastUpdate")}</th>
+              <th>{t("tracking_status.providerName")}</th>
+              <th>{t("tracking_status.deliveryTimeWithin")}</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>{CurrentStatus?.state}</td>
+              <td>{t(`tracking.${CurrentStatus?.state}`, "-")}</td>
               <td>
-                {new Date(CurrentStatus?.timestamp).toLocaleString("en-US", {
-                  weekday: "long",
-                  month: "short",
-                  day: "numeric",
-                  hour: "numeric",
-                  minute: "numeric",
+                {t("dateLong", {
+                  val: CurrentStatus?.timestamp
+                    ? new Date(CurrentStatus?.timestamp)
+                    : null,
                 })}
               </td>
               <td>{provider}</td>
               <td>
-                {new Date(PromisedDate).toLocaleString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
+                {t("dateMedium", {
+                  val: PromisedDate ? new Date(PromisedDate) : null,
                 })}
               </td>
             </tr>
             <tr>
               <td className="trackingProgress">
                 <ProgressBar
-                  currentStatus={CurrentStatus?.state}
+                  currentStatus={t(`tracking.${CurrentStatus?.state}`)}
                   trackingDataTransit={TransitEvents?.state}
                 />
               </td>

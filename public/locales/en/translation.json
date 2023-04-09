@@ -1,0 +1,55 @@
+{
+  "title": {
+    "home": "Home",
+    "pricing": "Pricing",
+    "contact-sales": "Contact Sales",
+    "track-shipment": "Tracking Shipment",
+    "sign-in": "Sign In"
+  },
+  "tracking_search": {
+    "header": "Track your shipment",
+    "placeholder": "Tracking No."
+  },
+  "tracking_status": {
+    "trackingNumber": "Tracking Number",
+    "lastUpdate": "Last update",
+    "providerName": "provider",
+    "deliveryTimeWithin": "Delivery Time Within"
+  },
+  "tracking_table": {
+    "header": "Shipment Details",
+    "hub": "Branch",
+    "date": "Date",
+    "time": "Time",
+    "details": "Details"
+  },
+  "reportProblem": {
+    "header": "Delivery address",
+    "question": "Is there a problem with your shipment ?!",
+    "button": "Report a problem"
+  },
+  "tracking": {
+    "TICKET_CREATED": "Shipment created",
+    "PACKAGE_RECEIVED": "The shipment has been received from the merchant",
+    "NOT_YET_SHIPPED": "Not yet shipped",
+    "OUT_FOR_DELIVERY": "The shipment is out for delivery",
+    "IN_TRANSIT": "shipment is in transit",
+    "RECEIVED_DELIVERY_LOCATION": "The delivery location has been reached",
+    "WAITING_FOR_CUSTOMER_ACTION": "Waiting for the customer's action",
+    "DELIVERED": "sent delivered handed",
+    "DELIVERED_TO_SENDER": "The shipment has been delivered to the merchant"
+  },
+
+  "dateLong": "{{val, date_long}}",
+  "dateMedium": "{{val, date_medium}}",
+  "dateShort": "{{val, date_short}}",
+  "dateTime": "{{val, time}}",
+  "number": "{{val, number}}",
+
+  "insert_trackingNumber": "Please, Insert Tracking Number into the track shipment menu above.",
+  "companyName": "Bosta",
+  "dummyLocationShort": "Nasr City",
+  "dummyLocationLong": "Imbaba, Talaat Harb Street, Workers City, next to Prince, House 17, Block 22, Cairo",
+  "comingSoon": "Coming soon, stay tuned",
+  "notFoundPageMessage": "Error 404 ! This page not found 😒"
+}

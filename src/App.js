@@ -1,7 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Layout, Error } from "./components";
-import OrderDetails from "./pages/OrderDetails";
+import { Layout } from "./components";
+import {
+  OrderDetails,
+  PricingPage,
+  SignInPage,
+  ContactSalesPage,
+  ErrorPage,
+} from "./pages";
 
 function App() {
   return (
@@ -11,11 +17,11 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<OrderDetails />} />
-              <Route path="*" element={<Error />} />
-              <Route path="/home" element={<h1>الصفحة الرئيسية</h1>} />
-              <Route path="/pricing" element={<h1>الأسعار</h1>} />
-              <Route path="/contact-sales" element={<h1>كلم المبيعات</h1>} />
-              <Route path="/login" element={<h1>تسجيل الدخول</h1>} />
+              <Route path="/home" element={<OrderDetails />} />
+              <Route path="/pricing" element={<PricingPage />} />
+              <Route path="/contact-sales" element={<ContactSalesPage />} />
+              <Route path="/sign-in" element={<SignInPage />} />
+              <Route path="*" element={<ErrorPage />} />
             </Route>
           </Routes>
         </div>

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-export const NavItem = ({ linkURL, linkName, onClick }) => {
+const NavItem = ({ linkURL, linkName, onClick }) => {
   return (
     <NavLink
       to={linkURL}
@@ -14,3 +14,5 @@ export const NavItem = ({ linkURL, linkName, onClick }) => {
     </NavLink>
   );
 };
+
+export default NavItem;

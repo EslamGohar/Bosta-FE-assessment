@@ -4,23 +4,48 @@ import { NavLink } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { BsSearch } from "react-icons/bs";
 import { fetchShipment } from "../redux/slices/shipment";
-import { NavItem } from "./NavItem";
+import { NavItem, LanguageSwitcher } from "./index";
 import useWindowWidth from "../hooks/useWindowWidth";
+
+import { useTranslation } from "react-i18next";
+// import cookies from "js-cookie";
 
 import logo from "../assets/en-logo.svg";
 import iconMenu from "../assets/icon-hamburger.svg";
 import iconClose from "../assets/icon-close.svg";
 import "../styles/navbar.scss";
 
+// const language = {
+//   en: {
+//     code: "en",
+//     name: "ENG",
+//     country_code: "gb",
+//   },
+//   ar: {
+//     code: "ar",
+//     name: "عربي",
+//     dir: "rtl",
+//     country_code: "ar-eg",
+//   },
+// };
+
 const Navbar = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [trackingNumber, setTrackingNumber] = useState("");
+  // const [anchorEl, setAnchorEl] = React.useState(null);
+
   const dispatch = useDispatch();
   const dropdownRef = useRef(null);
 
   const [showMenu, setShowMenu] = useState(false);
   const windowWidth = useWindowWidth();
   const mobileWidth = 480;
+
+  // language
+  const { t } = useTranslation();
+  // const currentLanguageCode = cookies.get("i18next") || "en";
+  // const currentLanguage = language[currentLanguageCode];
+  // let { pathname } = useLocation();
 
   const getTrackingNumber = (e) => {
     e.preventDefault();
@@ -47,6 +72,18 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, [dropdownRef]);
 
+  // useEffect(() => {
+  //   document.body.dir = currentLanguage.dir || "ltr";
+  //   if (pathname === "/") {
+  //     document.title = t("title.home");
+  //   } else if (pathname.includes("tracking-shipment")) {
+  //     document.title = t(`title.tracking-shipment`);
+  //   } else {
+  //     document.title = t(`title.${pathname.substring(1)}`);
+  //   }
+  //   setAnchorEl(null);
+  // }, [currentLanguage, t, pathname]);
+
   const menuIcon = (
     <img
       src={iconMenu}
@@ -69,13 +106,13 @@ const Navbar = () => {
     <div className="navbar">
       {windowWidth < mobileWidth ? closeIcon : ""}
       <div>
-        <NavItem linkName="Home" linkURL="/home" />
-        <NavItem linkName="Contact Sales" linkURL="/contact-sales" />
-        <NavItem linkName="Pricing" linkURL="/pricing" />
+        <NavItem linkName={t("title.home")} linkURL="/home" />
+        <NavItem linkName={t("title.contact-sales")} linkURL="/contact-sales" />
+        <NavItem linkName={t("title.pricing")} linkURL="/pricing" />
       </div>
       <div>
         <div className="trackShipment" onClick={handleTrackShipmentClick}>
-          <NavItem linkName="Track Shipment" linkURL="/" />
+          <NavItem linkName={t("title.track-shipment")} linkURL="/" />
           <span>
             <IoIosArrowDown />
           </span>
@@ -86,11 +123,11 @@ const Navbar = () => {
             ref={dropdownRef}
             className="dropdown"
           >
-            <p>Track your shipment</p>
+            <p>{t("tracking_search.header")}</p>
             <div className="input-container">
               <input
                 type="text"
-                placeholder="Tracking No."
+                placeholder={t("tracking_search.placeholder")}
                 onChange={(e) => setTrackingNumber(e.target.value)}
               />
               <button type="submit">
@@ -99,7 +136,10 @@ const Navbar = () => {
             </div>
           </form>
         )}
-        <NavItem linkName="Login" linkURL="/login" />
+        <NavItem linkName={t("title.sign-in")} linkURL="/sign-in" />
+        <div className="langDropdown">
+          <LanguageSwitcher />
+        </div>
       </div>
     </div>
   );
@@ -109,7 +149,6 @@ const Navbar = () => {
       <NavLink to="/">
         <img src={logo} alt="Bosta-logo" className="logo" />
       </NavLink>
-
       {windowWidth > mobileWidth ? links : showMenu ? links : menuIcon}
     </nav>
   );
