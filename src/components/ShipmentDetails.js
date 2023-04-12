@@ -23,12 +23,12 @@ const ShipmentDetails = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          padding: "5% 0",
           fontFamily: "'Cairo', sans-serif",
           fontWeight: "500",
+          fontSize: "14px",
         }}
       >
-        Here the details will appear..
+        {t("loading")}
       </div>
     );
   }

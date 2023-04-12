@@ -1,10 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { ProgressBar, Step } from "react-step-progress-bar";
 
-import { BiCheck } from "react-icons/bi";
+import { BiCheck, BiFork } from "react-icons/bi";
 import { FaShippingFast } from "react-icons/fa";
 import { BsBagCheckFill } from "react-icons/bs";
 import "../styles/progress-bar.scss";
+
+const shipmentStates = {
+  TICKET_CREATED: "Ticket created",
+  PACKAGE_RECEIVED: "Package received",
+  NOT_YET_SHIPPED: "Not yet shipped",
+  WAITING_FOR_CUSTOMER_ACTION: "Waiting for customer action",
+  IN_TRANSIT: "In transit",
+  OUT_FOR_DELIVERY: "Out for delivery",
+  DELIVERED_TO_SENDER: "Delivered to sender",
+  DELIVERED: "Delivered",
+};
+
+const shipmentStateReasons = {
+  DELIVERED: "The shipment has been delivered",
+  OUT_FOR_DELIVERY: "The shipment is out for delivery",
+  IN_TRANSIT: "The shipment is in transit",
+  RETRY_DELIVERY: "The customer is not in the address",
+  POSTPONED: "The customer requested postponement for another day.",
+  CUSTOMER_IS_NOT_ANSWERING: "Customer is not answering.",
+  EXCEPTION: "An exception occurred with the shipment",
+};
 
 const Colors = {
   red: "red",
@@ -14,59 +35,57 @@ const Colors = {
 
 const steps = [
   {
-    status: ["TICKET_CREATED"],
+    label: shipmentStates.TICKET_CREATED,
+    content: shipmentStateReasons.TICKET_CREATED,
     icon: <BiCheck />,
   },
   {
-    status: ["PACKAGE_RECEIVED"],
+    label: shipmentStates.PACKAGE_RECEIVED,
+    content: shipmentStateReasons.PACKAGE_RECEIVED,
     icon: <BiCheck />,
   },
   {
-    status: ["DELIVERED_TO_SENDER"],
+    label: shipmentStates.DELIVERED_TO_SENDER,
+    content: shipmentStateReasons.POSTPONED,
     icon: <FaShippingFast />,
-    reason: "تأجيل - العميل طلب التاجيل ليوم اخر",
   },
   {
-    status: ["DELIVERED"],
+    label: shipmentStates.DELIVERED,
+    content: shipmentStateReasons.DELIVERED,
     icon: <BsBagCheckFill />,
+  },
+  {
+    label: shipmentStates.NOT_YET_SHIPPED,
+    content: shipmentStateReasons.NOT_YET_SHIPPED,
+    icon: <BiFork />,
   },
 ];
 
 const ShipmentProgress = ({ currentStatus, trackingDataTransit }) => {
-  const [dataTransit, setDataTransit] = useState("");
-  const [status, setStatus] = useState();
+  const [transfer, setTransfer] = useState({});
 
   useEffect(() => {
-    setDataTransit(trackingDataTransit);
-  }, [trackingDataTransit, dataTransit]);
-
-  useEffect(() => {
-    setStatus(currentStatus);
-  }, [currentStatus]);
+    setTransfer({ status: currentStatus, dataTransit: trackingDataTransit });
+  }, [currentStatus, trackingDataTransit]);
 
   const progressBarColor =
-    status === "CANCELLED"
+    transfer.status === "CANCELLED"
       ? Colors.red
-      : status === "DELIVERED"
+      : transfer.status === "DELIVERED"
       ? Colors.green
       : Colors.orange;
 
-  const transfer = {
-    status: status, // Change shipment status to progress bar
-  };
-
   const getStepPosition = (transferStatus) => {
-    if (status === "DELIVERED_TO_SENDER") {
-      return 2;
-    }
-    return steps.findIndex(({ status }) => status === transferStatus);
+    if (transfer.status === "DELIVERED_TO_SENDER") return 2;
+    return steps.findIndex(({ label }) => label === transferStatus);
   };
 
   return (
     <div className="progressBar">
       <ProgressBar
-        percent={getStepPosition(transfer.status) * 33.33}
+        percent={getStepPosition(transfer.status) * 22.33}
         filledBackground={progressBarColor}
+        unfilledBackground="#e7e7e7"
       >
         {steps.map((step, index, arr) => {
           return (
@@ -83,11 +102,11 @@ const ShipmentProgress = ({ currentStatus, trackingDataTransit }) => {
                     gap: "8rem",
                     marginRight: "5rem",
                     borderRadius: "50%",
-                    width: accomplished ? 20 : 40,
-                    height: accomplished ? 20 : 40,
+                    width: accomplished ? 30 : 40,
+                    height: accomplished ? 30 : 40,
                     color: "#fff",
                     backgroundColor:
-                      accomplished || transfer.status === step.status
+                      accomplished || transfer.status === step.label
                         ? progressBarColor
                         : "gray",
                   }}
@@ -106,12 +125,16 @@ const ShipmentProgress = ({ currentStatus, trackingDataTransit }) => {
                   >
                     {step.status}
                   </label>
-                  {step.reason && (
+                  {step.content && (
                     <span
                       className="progressBar_accomplished__reason"
-                      style={{ color: `${progressBarColor}` }}
+                      style={{
+                        color: `${progressBarColor}`,
+                        width: "11rem",
+                        fontSize: "13px",
+                      }}
                     >
-                      {step.reason}
+                      {step.content}
                     </span>
                   )}
                 </div>

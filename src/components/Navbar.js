@@ -8,44 +8,22 @@ import { NavItem, LanguageSwitcher } from "./index";
 import useWindowWidth from "../hooks/useWindowWidth";
 
 import { useTranslation } from "react-i18next";
-// import cookies from "js-cookie";
 
 import logo from "../assets/en-logo.svg";
 import iconMenu from "../assets/icon-hamburger.svg";
 import iconClose from "../assets/icon-close.svg";
 import "../styles/navbar.scss";
 
-// const language = {
-//   en: {
-//     code: "en",
-//     name: "ENG",
-//     country_code: "gb",
-//   },
-//   ar: {
-//     code: "ar",
-//     name: "عربي",
-//     dir: "rtl",
-//     country_code: "ar-eg",
-//   },
-// };
-
 const Navbar = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [trackingNumber, setTrackingNumber] = useState("");
-  // const [anchorEl, setAnchorEl] = React.useState(null);
+  const [showMenu, setShowMenu] = useState(false);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const dropdownRef = useRef(null);
-
-  const [showMenu, setShowMenu] = useState(false);
   const windowWidth = useWindowWidth();
   const mobileWidth = 480;
-
-  // language
-  const { t } = useTranslation();
-  // const currentLanguageCode = cookies.get("i18next") || "en";
-  // const currentLanguage = language[currentLanguageCode];
-  // let { pathname } = useLocation();
 
   const getTrackingNumber = (e) => {
     e.preventDefault();
@@ -71,18 +49,6 @@ const Navbar = () => {
 
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, [dropdownRef]);
-
-  // useEffect(() => {
-  //   document.body.dir = currentLanguage.dir || "ltr";
-  //   if (pathname === "/") {
-  //     document.title = t("title.home");
-  //   } else if (pathname.includes("tracking-shipment")) {
-  //     document.title = t(`title.tracking-shipment`);
-  //   } else {
-  //     document.title = t(`title.${pathname.substring(1)}`);
-  //   }
-  //   setAnchorEl(null);
-  // }, [currentLanguage, t, pathname]);
 
   const menuIcon = (
     <img

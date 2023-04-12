@@ -6,7 +6,7 @@ const LanguageSwitcher = () => {
 
   const locales = {
     en: { lang: "English" },
-    ar: { lang: "Arabic" },
+    ar: { lang: "عـــربي" },
   };
 
   const handleLanguageChange = (e) => {
@@ -14,7 +14,7 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <div>
+    <>
       <select value={i18n.language} onChange={handleLanguageChange}>
         {Object.keys(locales).map((locale) => (
           <option
@@ -29,7 +29,7 @@ const LanguageSwitcher = () => {
           </option>
         ))}
       </select>
-    </div>
+    </>
   );
 };
 

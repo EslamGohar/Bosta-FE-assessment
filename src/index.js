@@ -13,7 +13,7 @@ root.render(
   <React.Fragment>
     <Suspense fallback="Loading...">
       <Provider store={store}>
-        <App />/{" "}
+        <App />
       </Provider>
     </Suspense>
   </React.Fragment>

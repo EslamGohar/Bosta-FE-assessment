@@ -4,18 +4,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: -67rem;
-  position: relative;
+  margin-right: -60rem;
 
   & > div {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10rem;
-    position: absolute;
-    left: -42rem;
-    padding-top: 5rem;
-    flex-direction: row-reverse;
+    gap: 6rem;
+    // padding-top: 3rem;
   }
 
   &_accomplished {

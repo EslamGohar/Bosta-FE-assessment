@@ -46,7 +46,8 @@
   "dateTime": "{{val, time}}",
   "number": "{{val, number}}",
 
-  "insert_trackingNumber": "Please, Insert Tracking Number into the track shipment menu above.",
+  "insert_trackingNumber": "Please, Insert Tracking Number into the track shipment menu above ..",
+  "loading": "Loading ...",
   "companyName": "Bosta",
   "dummyLocationShort": "Nasr City",
   "dummyLocationLong": "Imbaba, Talaat Harb Street, Workers City, next to Prince, House 17, Block 22, Cairo",
