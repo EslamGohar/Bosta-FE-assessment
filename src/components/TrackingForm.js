@@ -78,7 +78,7 @@ const TrackingForm = () => {
               <td className="trackingProgress">
                 <ProgressBar
                   currentStatus={t(`tracking.${CurrentStatus?.state}`)}
-                  trackingDataTransit={TransitEvents?.state}
+                  trackingDataTransit={TransitEvents}
                 />
               </td>
             </tr>

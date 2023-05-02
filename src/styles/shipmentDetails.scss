@@ -8,11 +8,11 @@
 
   .table-details {
     flex: 1;
+    margin-bottom: 18px;
 
     .table-title {
       font-family: $ff-primary;
       font-size: 17px;
-      text-align: right;
       margin-bottom: 20px;
     }
 
@@ -21,12 +21,10 @@
       text-align: center;
       width: 100%;
       margin-top: -4px;
-
       border: 1px solid #e8e8e8;
       border-radius: 7px;
       border-collapse: separate;
       border-spacing: 0;
-
       box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 
       th {
@@ -50,14 +48,12 @@
     &_container {
       border: 1px solid #e8e8e8;
       border-radius: 6px;
-      background-color: #f8f8f8;
+      background-color: #f9f9f9;
       font-family: $ff-primary;
       font-size: 15px;
       width: 21rem;
       padding: 0.8rem 1.2rem;
-      text-align: right;
       margin-bottom: 20px;
-
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
     }
 
@@ -68,12 +64,13 @@
     }
 
     &_report {
+      display: flex;
+
       border: 1px solid #e8e8e8;
       border-radius: 5px;
-      padding: 23px;
-      display: flex;
       width: 21rem;
-
+      height: 130px;
+      padding: 20px;
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 
       .help {
@@ -82,37 +79,40 @@
           font-family: $ff-primary;
           font-size: 15px;
           font-weight: 800;
-          width: 16rem;
+          text-align: center;
         }
 
-        &_btn {
-          font-size: 14px;
-          font-family: $ff-primary;
-          background-color: $bg-btn;
-          color: $bg-color;
+        &_center {
+          .btn-container {
+            text-align: center;
 
-          border: 0;
-          border-radius: 15px;
-          padding: 5px 9px;
-          margin-top: 12px;
-          cursor: pointer;
+            .help_btn {
+              font-size: 14px;
+              font-family: $ff-primary;
+              background-color: $bg-btn;
+              color: $bg-color;
 
-          &:hover {
-            border: 1px solid $bg-btn;
-            color: $bg-btn;
-            background-color: $bg-color;
-            transition: all 0.2s ease-in-out;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+              border: 0;
+              border-radius: 10px;
+              padding: 5px 25px;
+              margin-top: 12px;
+              cursor: pointer;
+
+              &:hover {
+                border: 1px solid $bg-btn;
+                color: $bg-btn;
+                background-color: $bg-color;
+                transition: all 0.2s ease-in-out;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+              }
+            }
           }
-        }
-
-        &_img {
-          display: flex;
-          align-items: center;
-          flex: 1 1;
-          position: relative;
-          right: 45px;
-          top: 20px;
+          img {
+            position: absolute;
+            right: 5rem;
+            width: 70px;
+            margin: 15px;
+          }
         }
       }
     }

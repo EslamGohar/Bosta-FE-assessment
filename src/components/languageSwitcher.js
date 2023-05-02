@@ -3,14 +3,17 @@ import { useTranslation } from "react-i18next";
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
-
   const locales = {
     en: { lang: "English" },
     ar: { lang: "عـــربي" },
   };
 
+  // switch between RTL and LTR
+  document.body.dir = i18n.dir();
+
   const handleLanguageChange = (e) => {
     i18n.changeLanguage(e.target.value);
+    document.body.dir = i18n.dir();
   };
 
   return (

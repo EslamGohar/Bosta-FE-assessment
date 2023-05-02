@@ -6,10 +6,9 @@ import support from "../assets/support.png";
 import "../styles/shipmentDetails.scss";
 
 const ShipmentDetails = () => {
-  const dispatch = useDispatch();
   const { loading, data, error } = useSelector((state) => state.shipment);
   const { TransitEvents } = data;
-
+  const dispatch = useDispatch();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -39,6 +38,25 @@ const ShipmentDetails = () => {
 
   return (
     <div className="shipmentDetails">
+      <div className="shipmentDetails__address">
+        <h2>{t("reportProblem.header")}</h2>
+        <div className="shipmentDetails__address_container">
+          {t("dummyLocationLong")}
+        </div>
+
+        <div className="shipmentDetails__address_report">
+          <div className="help_center">
+            <p className="help_title">{t("reportProblem.question")}</p>
+            <div className="btn-container">
+              <button type="submit" className="help_btn">
+                {t("reportProblem.button")}
+              </button>
+            </div>
+          </div>
+          <img className="help_img" alt="logo" src={support} />
+        </div>
+      </div>
+
       <div className="table-details">
         <h2 className="table-title">{t("tracking_table.header")}</h2>
         <table>
@@ -59,43 +77,17 @@ const ShipmentDetails = () => {
                     {t("dateShort", {
                       val: event?.timestamp ? new Date(event?.timestamp) : null,
                     })}
-                    {/* {new Date(event?.timestamp).toLocaleString("ar-EG", {
-                      day: "numeric",
-                      month: "numeric",
-                      year: "numeric",
-                    }) || "-"} */}
                   </td>
                   <td>
                     {t("dateTime", {
                       val: event?.timestamp ? new Date(event?.timestamp) : null,
                     })}
-                    {/* {new Date(event?.timestamp).toLocaleTimeString("ar-EG", {
-                      hour: "numeric",
-                      minute: "numeric",
-                    }) || "-"} */}
                   </td>
                   <td>{t(`tracking.${event?.state}`, "-")}</td>
                 </tr>
               ))}
           </tbody>
         </table>
-      </div>
-
-      <div className="shipmentDetails__address">
-        <h2>{t("reportProblem.header")}</h2>
-        <div className="shipmentDetails__address_container">
-          {t("dummyLocationLong")}
-        </div>
-
-        <div className="shipmentDetails__address_report">
-          <div className="help_center">
-            <p className="help_title">{t("reportProblem.question")}</p>
-            <button type="submit" className="help_btn">
-              {t("reportProblem.button")}
-            </button>
-          </div>
-          <img className="help_img" alt="logo" src={support} />
-        </div>
       </div>
     </div>
   );

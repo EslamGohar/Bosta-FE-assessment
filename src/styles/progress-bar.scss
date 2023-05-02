@@ -1,17 +1,13 @@
 @import "./base";
 
 .progressBar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: -60rem;
+  padding: 60px 0;
+  width: 55rem;
 
   & > div {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 6rem;
-    // padding-top: 3rem;
   }
 
   &_accomplished {
@@ -29,7 +25,6 @@
       width: max-content;
     }
   }
-
   &_label {
     position: absolute;
     top: 4rem;
@@ -39,11 +34,10 @@
   }
 
   &_icon {
-    width: 20px;
-    height: auto;
+    width: 30px;
+    height: 30px;
+    background-color: gray;
+    color: #fff;
+    border-radius: 50%;
   }
 }
-
-// .RSPBprogression {
-//   width: 100%;
-// }

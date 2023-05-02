@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ProgressBar, Step } from "react-step-progress-bar";
-
-import { BiCheck, BiFork } from "react-icons/bi";
+import { BiCheck } from "react-icons/bi";
 import { FaShippingFast } from "react-icons/fa";
 import { BsBagCheckFill } from "react-icons/bs";
 import "../styles/progress-bar.scss";
@@ -29,8 +28,8 @@ const shipmentStateReasons = {
 
 const Colors = {
   red: "red",
-  orange: "orange",
   green: "green",
+  orange: "orange",
 };
 
 const steps = [
@@ -54,11 +53,6 @@ const steps = [
     content: shipmentStateReasons.DELIVERED,
     icon: <BsBagCheckFill />,
   },
-  {
-    label: shipmentStates.NOT_YET_SHIPPED,
-    content: shipmentStateReasons.NOT_YET_SHIPPED,
-    icon: <BiFork />,
-  },
 ];
 
 const ShipmentProgress = ({ currentStatus, trackingDataTransit }) => {
@@ -69,27 +63,34 @@ const ShipmentProgress = ({ currentStatus, trackingDataTransit }) => {
   }, [currentStatus, trackingDataTransit]);
 
   const progressBarColor =
-    transfer.status === "CANCELLED"
+    transfer.status === "NOT_YET_SHIPPED"
       ? Colors.red
       : transfer.status === "DELIVERED"
       ? Colors.green
-      : Colors.orange;
+      : transfer.status === "IN_TRANSIT"
+      ? Colors.orange
+      : "";
 
   const getStepPosition = (transferStatus) => {
-    if (transfer.status === "DELIVERED_TO_SENDER") return 2;
+    if (transfer.status === "DELIVERED") return 2;
+
     return steps.findIndex(({ label }) => label === transferStatus);
   };
 
   return (
     <div className="progressBar">
       <ProgressBar
-        percent={getStepPosition(transfer.status) * 22.33}
+        height={"10px"}
+        percent={getStepPosition(transfer.status) * 100}
         filledBackground={progressBarColor}
         unfilledBackground="#e7e7e7"
       >
         {steps.map((step, index, arr) => {
           return (
             <Step
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
               key={index}
               position={100 * (index / arr.length)}
               transition="scale"
@@ -99,12 +100,12 @@ const ShipmentProgress = ({ currentStatus, trackingDataTransit }) => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    gap: "8rem",
-                    marginRight: "5rem",
+                    marginLeft: "17rem",
                     borderRadius: "50%",
-                    width: accomplished ? 30 : 40,
-                    height: accomplished ? 30 : 40,
+                    width: accomplished ? 25 : 30,
+                    height: accomplished ? 25 : 30,
                     color: "#fff",
+                    fontSize: "15px",
                     backgroundColor:
                       accomplished || transfer.status === step.label
                         ? progressBarColor
@@ -112,7 +113,10 @@ const ShipmentProgress = ({ currentStatus, trackingDataTransit }) => {
                   }}
                 >
                   {accomplished ? (
-                    <BiCheck className="progressBar_icon" />
+                    <BiCheck
+                      className="progressBar_icon"
+                      style={{ marginRight: "-25px" }}
+                    />
                   ) : (
                     step.icon
                   )}
@@ -125,6 +129,7 @@ const ShipmentProgress = ({ currentStatus, trackingDataTransit }) => {
                   >
                     {step.status}
                   </label>
+
                   {step.content && (
                     <span
                       className="progressBar_accomplished__reason"
